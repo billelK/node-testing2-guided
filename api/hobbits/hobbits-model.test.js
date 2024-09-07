@@ -17,7 +17,6 @@ test("environment is testing ", ()=> {
 describe("getAll ", ()=> {
     test("resolves all the hobbits in the DB", async() => {
         const result = await hobbit.getAll()
-        console.log(result)
         expect(result).toEqual([
             { id: 1, name: 'sam' },
             { id: 2, name: 'frodo' },
