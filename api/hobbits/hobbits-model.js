@@ -17,7 +17,9 @@ function getById(id) {
 }
 
 async function insert(hobbit) {
-  return null
+  return await db("hobbits").insert(hobbit).then(([id]) => {
+    return getById(id)
+  })
 }
 
 async function update(id, changes) {

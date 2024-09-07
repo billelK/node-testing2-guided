@@ -30,7 +30,26 @@ describe("getAll ", ()=> {
 
 describe("getById", () => {
     test("resolves to the use by a specific ID", async()=> {
-        const result = await hobbit.getById(1)
+        let result = await hobbit.getById(1)
         expect(result).toMatchObject({name: "sam"})
+        result = await hobbit.getById(2)
+        expect(result).toMatchObject({name: "frodo"})
+        result = await hobbit.getById(3)
+        expect(result).toMatchObject({name: "pippin"})
+        result = await hobbit.getById(4)
+        expect(result).toMatchObject({name: "merry"})
+    })
+})
+
+describe("insert", ()=> {
+    const bilbo = {name: "bilbo"}
+    test("resolves to the newly created hobbit", async() => {
+        const result = await hobbit.insert(bilbo)
+        expect(result).toMatchObject(bilbo)
+    })
+    test("if the newly created hobbit exists in the Hobbits DB", async() => {
+        await hobbit.insert(bilbo)
+        const result = await db("hobbits") 
+        expect(result).toHaveLength(5)
     })
 })
